@@ -1,47 +1,56 @@
 #include <iostream>
 
-double getValue()
+static constexpr double GRAVITY { 9.8f };
+
+double getTowerHeight()
 {
-	std::cout << "Enter a double value: ";
-	double d {};
-	std::cin >> d;
-	return d;
+	std::cout << "Enter the height of the tower in meters: ";
+	double  x {};
+	std::cin >> x;
+	return x;
 }
 
-char getOperation()
+double calculateBallHeight(double height, int seconds)
 {
-	std::cout << "Enter +, -, *, or /: ";
-	char d {};
-	std::cin >> d;
-	return d;
+	double distance_fallen { GRAVITY * (seconds * seconds) / 2.0 };
+	double currentHeight { height - distance_fallen };
+
+	if (height < 0.0)
+	{
+		return 0.0;
+	}
+
+	return currentHeight;
 }
 
-void printResult(double x, char operation, double y)
+void printBallHeight(double height, int seconds)
 {
-	double result {};
-
-	if (operation == '+')
-		result = x + y;
-	else if (operation == '-')
-		result = x - y;
-	else if (operation == '*')
-		result = x * y;
-	else if (operation == '*')
-		result = x / y;
+	if (height > 0)
+	{
+		std::cout << "At " << seconds << " seconds, the ball is at height: " << height << " meters\n";
+	}
 	else
-		return;
+	{
+		std::cout << "At 5 seconds, the ball is on the ground.\n";
+	}
+}
 
-	std::cout << x << ' ' << operation << ' ' << y << " is " << result << '\n';
+void calculateAndPrintBallHeight(double height, int seconds)
+{
+	double ballHeight { calculateBallHeight(height, seconds) };
+	printBallHeight(ballHeight, seconds);
 }
 
 int main()
 {
-	double num1 { getValue() };
-	double num2 { getValue() };
+	double towerHeight { getTowerHeight() };
 
-	char operation { getOperation() };
-
-	printResult(num1, operation, num2);
+	calculateAndPrintBallHeight(towerHeight, 0);
+	calculateAndPrintBallHeight(towerHeight, 1);
+	calculateAndPrintBallHeight(towerHeight, 2);
+	calculateAndPrintBallHeight(towerHeight, 3);
+	calculateAndPrintBallHeight(towerHeight, 4);
+	calculateAndPrintBallHeight(towerHeight, 5);
 
 	return EXIT_SUCCESS;
 }
