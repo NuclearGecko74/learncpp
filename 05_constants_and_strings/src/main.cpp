@@ -1,34 +1,42 @@
+#include <cstdint> // for std::uint8_t
 #include <iostream>
-#include <string>
 
-std::string getName()
+std::string getName(int num)
 {
-    std::string fullName {};
-
-    std::cout << "Enter your full name: ";
-    std::getline(std::cin >> std::ws, fullName);
-
-    return fullName;
+    std::cout << "Enter the name of person #" << num << ": ";
+    std::string name{};
+    std::getline(std::cin >> std::ws, name);
+    return name;
 }
 
-int getAge()
+int getAge(std::string_view name)
 {
+    std::cout << "Enter the age of " << name << ": ";
     int age{};
-
-    std::cout << "Enter your age: ";
     std::cin >> age;
-
     return age;
+}
+
+void printAgeComparison(std::string_view name1, int age1, std::string_view name2, int age2)
+{
+    if (age1 > age2)
+        std::cout << name1 << " (age " << age1 << ") is older than " << name2 << " (age " << age2 << ").\n";
+    else if (age1 < age2)
+        std::cout << name2 << " (age " << age2 << ") is older than " << name1 << " (age " << age1 << ").\n";
+    else
+        std::cout << name1 << " (age " << age1 << ") have the same age as " << name2 << " (age " << age2 << ").\n";
 }
 
 int main()
 {
-    std::string name { getName() };
-    int age { getAge() };
 
-    int nameLength { static_cast<int>(name.length()) };
+    std::string name1 { getName(1) };
+    int age1 { getAge(name1) };
 
-    std::cout << "Your age + length of name is: " << age + nameLength << '\n'; 
+    std::string name2 { getName(2) };
+    int age2 { getAge(name2) };
 
-    return EXIT_SUCCESS;
+    printAgeComparison(name1, age1, name2, age2);
+
+    return 0;
 }
