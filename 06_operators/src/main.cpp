@@ -1,6 +1,26 @@
 #include <iostream>
 
-int main() {
-    std::cout << "Hello from 06_operators!" << std::endl;
-    return 0;
+int getInt()
+{
+    std::cout << "Enter an integer: ";
+    int x{};
+    std::cin >> x;
+    return x;
+}
+
+constexpr bool isEven(int x)
+{
+    return x % 2 == 0;
+}
+
+int main()
+{
+	int x { getInt() };
+
+    if (isEven(x))
+        std::cout << x << " is even\n";
+    else
+        std::cout << x << " is odd\n";
+
+    return EXIT_SUCCESS;
 }
