@@ -1,27 +1,37 @@
 #include <iostream>
 
-int getInt()
+// Write the function getQuantityPhrase() here
+std::string_view getQuantityPhrase(int quantity)
 {
-    std::cout << "Enter an integer: ";
-    int x{};
-    std::cin >> x;
-    return x;
+    if (quantity < 0)
+        return "negative";
+    if (quantity == 0)
+        return "no";
+    if (quantity == 1)
+        return "a single";
+    if (quantity == 2)
+        return "a couple of";
+    if (quantity == 3)
+        return "a few";
+    return "many";
 }
 
-// Rewrite this function using operator! instead of operator==.
-constexpr bool isEven(int x)
+// Write the function getApplesPluralized() here
+std::string_view getApplesPluralized(int quantity)
 {
-    return !(x % 2);
+    return (quantity == 1) ? "apple" : "apples";
 }
 
 int main()
 {
-	int x { getInt() };
+    constexpr int maryApples { 3 };
+    std::cout << "Mary has " << getQuantityPhrase(maryApples) << ' ' << getApplesPluralized(maryApples) << ".\n";
 
-    if (isEven(x))
-        std::cout << x << " is even\n";
-    else
-        std::cout << x << " is odd\n";
+    std::cout << "How many apples do you have? ";
+    int numApples{};
+    std::cin >> numApples;
 
-    return EXIT_SUCCESS;
+    std::cout << "You have " << getQuantityPhrase(numApples) << ' ' << getApplesPluralized(numApples) << ".\n";
+
+    return 0;
 }
