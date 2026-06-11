@@ -1,27 +1,28 @@
-/*
-A bitwise rotation is like a bitwise shift, except that any bits
-shifted off one end are added back to the other end. For example
-0b1001 << 1 would be 0b0010, but a left rotate by 1 would result in 
-0b0011 instead. Implement a function that does a left rotate on a 
-std::bitset<4>. For this one, it’s okay to use test() and set().
-*/
-
 #include <bitset>
+#include <cstdint>
 #include <iostream>
-
-// "rotl" stands for "rotate left"
-std::bitset<4> rotl(std::bitset<4> bits)
-{
-    return (bits << 1) | (bits >> 3);
-}
 
 int main()
 {
-	std::bitset<4> bits1{ 0b0001 };
-	std::cout << rotl(bits1) << '\n';
+    [[maybe_unused]] constexpr std::uint8_t option_viewed{ 0x01 };
+    [[maybe_unused]] constexpr std::uint8_t option_edited{ 0x02 };
+    [[maybe_unused]] constexpr std::uint8_t option_favorited{ 0x04 };
+    [[maybe_unused]] constexpr std::uint8_t option_shared{ 0x08 };
+    [[maybe_unused]] constexpr std::uint8_t option_deleted{ 0x10 };
 
-	std::bitset<4> bits2{ 0b1001 };
-	std::cout << rotl(bits2) << '\n';
+    std::uint8_t myArticleFlags{ option_favorited };
 
-	return 0;
+    // Add a line of code to set the article as viewed.
+	myArticleFlags |= option_viewed;
+
+	// b) Add a line of code to check if the article was deleted.
+	std::cout << std::boolalpha;
+	std::cout << "Article deleted? " << static_cast<bool>(myArticleFlags & option_deleted) << '\n';
+
+	// c) Add a line of code to clear the article as a favorite.
+	myArticleFlags &= ~option_favorited;
+
+    std::cout << std::bitset<8>{ myArticleFlags } << '\n';
+
+    return 0;
 }
