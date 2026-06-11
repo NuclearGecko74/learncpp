@@ -1,28 +1,37 @@
-#include <bitset>
-#include <cstdint>
 #include <iostream>
+#include <cstdint>
+
+std::uint8_t getNumber()
+{
+	std::cout << "Enter a number (0-255): ";
+	int x{};
+	std::cin >> x;
+	return static_cast<std::uint8_t>(x);
+}
+
+void printBit(int x, int pow)
+{
+	std::cout << ((x / pow) % 2);
+}
+
+void printBinary(std::uint8_t n)
+{
+	printBit(n, 128);
+	printBit(n, 64);
+	printBit(n, 32);
+	printBit(n, 16);
+	std::cout << ' ';
+	printBit(n, 8);
+	printBit(n, 4);
+	printBit(n, 2);
+	printBit(n, 1);
+	std::cout << '\n';
+}
 
 int main()
 {
-    [[maybe_unused]] constexpr std::uint8_t option_viewed{ 0x01 };
-    [[maybe_unused]] constexpr std::uint8_t option_edited{ 0x02 };
-    [[maybe_unused]] constexpr std::uint8_t option_favorited{ 0x04 };
-    [[maybe_unused]] constexpr std::uint8_t option_shared{ 0x08 };
-    [[maybe_unused]] constexpr std::uint8_t option_deleted{ 0x10 };
+    std::uint8_t number { getNumber() };
+	printBinary(number);
 
-    std::uint8_t myArticleFlags{ option_favorited };
-
-    // Add a line of code to set the article as viewed.
-	myArticleFlags |= option_viewed;
-
-	// b) Add a line of code to check if the article was deleted.
-	std::cout << std::boolalpha;
-	std::cout << "Article deleted? " << static_cast<bool>(myArticleFlags & option_deleted) << '\n';
-
-	// c) Add a line of code to clear the article as a favorite.
-	myArticleFlags &= ~option_favorited;
-
-    std::cout << std::bitset<8>{ myArticleFlags } << '\n';
-
-    return 0;
+    return EXIT_SUCCESS;
 }
