@@ -1,25 +1,11 @@
 #include <iostream>
 
+// Write a for-loop that prints every even number from 0 to 20.
 int main()
 {
-    int i { 1 };
-    while (i <= 5)
+    for (int i {0}; i <= 20; i++)
     {
-        int spaces {};
-        while (spaces < (5-i))
-        {
-            std::cout << "  ";
-            spaces++;
-        }
-        
-
-        int j { i };
-        while (j >= 1)
-        {
-            std::cout << j-- << ' ';
-        }
-        std::cout << '\n';
-        i++;
+        std::cout << i << '\n';
     }
     
     return 0;
