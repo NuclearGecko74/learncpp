@@ -1,23 +1,24 @@
 #include <iostream>
 
-/*
-Write a function named sumTo() that takes an integer 
-parameter named value, and returns the sum of all the
- numbers from 1 to value.
-*/
-
-int sumTo(int x)
+void fizzbuzz(int x)
 {
-    int sum{};
-    for(int i {1}; i <= x; i++)
+    for (int i { 1 }; i <= x; i++)
     {
-        sum += i;
+        if (i % 3 == 0)
+            std::cout << "fizz";
+        if (i % 5 == 0)
+            std::cout << "buzz";
+        if (i % 7 == 0)
+            std::cout << "pop";
+        if ((i % 3) && (i % 5) && (i % 7))
+            std::cout << i;
+        std::cout << '\n';
     }
-    return sum;
 }
 
 int main()
 {
-    std::cout << sumTo(5) << '\n';    
-    return 0;
+    fizzbuzz(150);
+    
+    return EXIT_SUCCESS;
 }
