@@ -2,20 +2,25 @@
 
 int main()
 {
-    int i{ 5 };
-    while (i >= 1)
+    int i { 1 };
+    while (i <= 5)
     {
+        int spaces {};
+        while (spaces < (5-i))
+        {
+            std::cout << "  ";
+            spaces++;
+        }
+        
+
         int j { i };
         while (j >= 1)
         {
-            std::cout << j << ' ';
-            j--;
+            std::cout << j-- << ' ';
         }
         std::cout << '\n';
-        i--;
+        i++;
     }
     
-    
-
     return 0;
 }
