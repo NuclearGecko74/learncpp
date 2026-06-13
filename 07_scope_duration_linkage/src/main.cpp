@@ -1,43 +1,18 @@
 #include <iostream>
 
-/*
-Write a program that asks the user to enter two integers, one named smaller,
-the other named larger. If the user enters a smaller value for the second integer,
-use a block and a temporary variable to swap the smaller and larger values. 
-Then print the values of the smaller and larger variables. Add comments to your code 
-indicating where each variable dies. Note: When you print the values, smaller should 
-hold the smaller input and larger the larger input, no matter which order they were entered in.
-*/
-
-int getInt()
+int accumulate(int x)
 {
-    int x{};
-    std::cin >> x;
-    return x;
+    static int sum {};
+    sum += x;
+    return sum;
 }
 
-void printSmallerLarger(int smaller, int larger)
+int main()
 {
-    if (smaller > larger)
-    {
-        std::cout << "Swapping the values...\n";
-        int temp {smaller};
-        smaller = larger;
-        larger = temp;
-    }
-    std::cout << "The smaller value is " << smaller << '\n';
-    std::cout << "The larger value is " << larger << '\n';
-}
-
-int main() 
-{
-    std::cout << "Enter an integer: ";
-    int smaller { getInt() };
-
-    std::cout << "Enter a larger integer: ";
-    int larger { getInt() };
-
-    printSmallerLarger(smaller, larger);
+    std::cout << accumulate(4) << '\n'; // prints 4
+    std::cout << accumulate(3) << '\n'; // prints 7
+    std::cout << accumulate(2) << '\n'; // prints 9
+    std::cout << accumulate(1) << '\n'; // prints 10
 
     return 0;
 }
