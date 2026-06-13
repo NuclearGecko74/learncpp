@@ -1,45 +1,63 @@
-// Make sure that assert triggers even if we compile in release mode
-#undef NDEBUG
-
-#include <cassert> // for assert
 #include <iostream>
-#include <math.h>
+#include "Random.h"
 
-bool isPrime(int x)
-{
-    if (x <= 1) return false;
-    if (x == 2) return true;
-    if (x % 2 == 0) return false;
-
-    for (int i{2}; i <= static_cast<int>(std::sqrt(x)); i++)
-    {
-        if (x % i == 0)
-            return false;
-    }
-    return true;
-}
+void playGame(int guesses=7, int min=1, int max=100);
+bool playAgain();
 
 int main()
 {
-    assert(!isPrime(0)); // terminate program if isPrime(0) is true
-    assert(!isPrime(1));
-    assert(isPrime(2));  // terminate program if isPrime(2) is false
-    assert(isPrime(3));
-    assert(!isPrime(4));
-    assert(isPrime(5));
-    assert(isPrime(7));
-    assert(!isPrime(9));
-    assert(isPrime(11));
-    assert(isPrime(13));
-    assert(!isPrime(15));
-    assert(!isPrime(16));
-    assert(isPrime(17));
-    assert(isPrime(19));
-    assert(isPrime(97));
-    assert(!isPrime(99));
-    assert(isPrime(13417));
+    constexpr int guesses {7};
+    constexpr int min {1};
+    constexpr int max {100};
+    do 
+    {
+        playGame(guesses, min, max);
+    } while(playAgain());
 
-    std::cout << "Success!\n";
+    return EXIT_SUCCESS;
+}
 
-    return 0;
+void playGame(int guesses, int min, int max)
+{
+    std::cout << "Let's play a game. I'm thinking of a number between " << min << " and " << max << ". You have " << guesses << " tries to guess what it is.\n";
+
+    int randomNumber { Random::get(min, max) };
+    int userGuess {};
+
+    for (int guess {1}; guess <= guesses; guess++)
+    {
+        std::cout << "Guess #" << guess << ": ";
+        std::cin >> userGuess;
+
+        if (userGuess < randomNumber)
+            std::cout << "Your guess is too low.\n";
+        else if (userGuess > randomNumber)
+            std::cout << "Your guess is too high.\n";
+        else
+            break;
+    }
+
+    if (userGuess == randomNumber)
+        std::cout << "Correct! You win!\n";
+    else
+        std::cout << "Sorry, you lose. The correct number was " << randomNumber << ".\n";
+}
+
+bool playAgain()
+{
+    while (true)
+	{
+		char ch{};
+		std::cout << "Would you like to play again (y/n)? ";
+		std::cin >> ch;
+
+		switch (ch)
+		{
+		case 'y': return true;
+		case 'n': return false;
+		}
+	}
+     
+
+    
 }
