@@ -1,0 +1,21 @@
+# Build
+build/
+
+# Compiled files
+*.o
+*.out
+*.a
+*.so
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+
+# VS Code
+.vscode/
+
+# Debug
+core
+*.log
