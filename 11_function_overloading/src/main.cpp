@@ -1,24 +1,20 @@
-// define your factorial() function template here
-template <int N>
-constexpr int factorial()
-{
-    static_assert(N >= 0 && "factorial(): Cannot be negative.");
+/*
+Write a function template named add() that allows the users
+ to add 2 values of the same type
+*/
 
-    int result {1};
-    for (int i {2}; i <= N; i++)
-    {
-        result *= i;
-    }
-    return result;
+#include <iostream>
+
+template <typename T, typename U>
+auto add(T x, U y)
+{
+    return x + y;
 }
 
 int main()
 {
-    static_assert(factorial<0>() == 1);
-    static_assert(factorial<3>() == 6);
-    static_assert(factorial<5>() == 120);
+    std::cout << add(2, 3) << '\n';
+	std::cout << add(1.2, 3.4) << '\n';
 
-    factorial<-3>(); // should fail to compile
-
-    return 0;
+    return EXIT_SUCCESS;
 }
