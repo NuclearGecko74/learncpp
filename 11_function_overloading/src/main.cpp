@@ -1,22 +1,22 @@
 /*
-Write a function template named mult() that allows the user 
-to multiply one value of any type (first parameter) and 
-an integer (second parameter).
+Write a function template named sub() that allows the user 
+to subtract two values of different types.
 */
 
 #include <iostream>
 
-// write your mult function template here
-template <typename T>
-T mult(T x, int y)
+// write your sub function template here
+template <typename T, typename U>
+auto sub(T x, U y)
 {
-    return x * y;
+    return x - y;
 }
 
 int main()
 {
-	std::cout << mult(2, 3) << '\n';
-	std::cout << mult(1.2, 3) << '\n';
+	std::cout << sub(3, 2) << '\n';
+	std::cout << sub(3.5, 2) << '\n';
+	std::cout << sub(4, 1.5) << '\n';
 
-	return EXIT_SUCCESS;
+	return 0;
 }
