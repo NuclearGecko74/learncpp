@@ -22,7 +22,7 @@ constexpr double calculateBallHeight(double towerHeight, int seconds)
 }
 
 // Prints ball height above ground
-void printBallHeight(const double ballHeight, const int seconds)
+void printBallHeight(double ballHeight, int seconds)
 {
 	if (ballHeight > 0.0)
 		std::cout << "At " << seconds << " seconds, the ball is at height: " << ballHeight << " meters\n";
@@ -32,7 +32,7 @@ void printBallHeight(const double ballHeight, const int seconds)
 
 // Calculates the current ball height and then prints it
 // This is a helper function to make it easier to do this
-void printCalculatedBallHeight(const double towerHeight, const int seconds)
+void printCalculatedBallHeight(double towerHeight, int seconds)
 {
 	const double ballHeight{ calculateBallHeight(towerHeight, seconds) };
 	printBallHeight(ballHeight, seconds);
